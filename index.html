@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Intermodular - CFGM Actividades Comerciales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .accordion-content.active { max-height: 3000px; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .search-highlight { background-color: #fef08a; padding: 2px 4px; border-radius: 2px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+        .dark ::-webkit-scrollbar-track { background: #1f2937; }
+        .tab-btn.active { background-color: #2563eb; color: white; }
+        .print-content { page-break-after: always; }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-primary-700 to-primary-900 dark:from-primary-900 dark:to-primary-950 text-white shadow-xl fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-2">
+                        <i class="fas fa-graduation-cap text-3xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold">Proyecto Intermodular</h1>
+                        <p class="text-sm text-primary-200 hidden md:block">CFGM Actividades Comerciales — I.E.S. "La Ería" — Curso 2025-2026</p>
+                        <p class="text-xs text-primary-200 md:hidden">CFGM Act. Comerciales — 2025-2026</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition" title="Cambiar tema">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-95 pt-20 overflow-y-auto">
+        <nav class="container mx-auto px-4 space-y-2 pb-8">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition"><i class="fas fa-home mr-3"></i> Inicio</a>
+            <a href="#ras" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-bullseye mr-3"></i> RAs y Criterios de Evaluación</a>
+            <a href="#indice" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-list mr-3"></i> Índice del Proyecto</a>
+            <a href="#evaluacion" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-clipboard-check mr-3"></i> Rúbrica de Evaluación</a>
+            <a href="#formato" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-file-alt mr-3"></i> Formato y Normas</a>
+            <a href="#defensa" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-microphone mr-3"></i> Exposición y Defensa</a>
+            <a href="#calendario" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-calendar-alt mr-3"></i> Calendario</a>
+            <a href="#recursos" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-book mr-3"></i> Recursos y Referencias</a>
+            <a href="#normativa" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-gavel mr-3"></i> Normativa</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition"><i class="fas fa-envelope mr-3"></i> Contacto</a>
+        </nav>
+    </div>
+
+    <div class="flex pt-16 md:pt-20">
+        <!-- Sidebar -->
+        <aside class="hidden md:block w-72 bg-white dark:bg-gray-800 shadow-xl fixed h-full overflow-y-auto z-10 border-r dark:border-gray-700">
+            <div class="p-4">
+                <div class="text-center mb-4 pb-4 border-b dark:border-gray-700">
+                    <i class="fas fa-graduation-cap text-3xl text-primary-600 mb-2"></i>
+                    <h2 class="font-bold text-sm text-primary-700 dark:text-primary-400">Proyecto Intermodular</h2>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Módulo 1713 — 50 horas</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">RD 499/2024</p>
+                </div>
+                <nav class="space-y-1">
+                    <a href="#inicio" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-home w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="#ras" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-bullseye w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>RAs y Criterios</span>
+                    </a>
+                    <a href="#indice" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-list w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Índice del Proyecto</span>
+                    </a>
+                    <a href="#evaluacion" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-clipboard-check w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Rúbrica Evaluación</span>
+                    </a>
+                    <a href="#formato" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-file-alt w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Formato y Normas</span>
+                    </a>
+                    <a href="#defensa" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-microphone w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Exposición y Defensa</span>
+                    </a>
+                    <a href="#calendario" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-calendar-alt w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Calendario</span>
+                    </a>
+                    <a href="#recursos" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-book w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Recursos</span>
+                    </a>
+                    <a href="#normativa" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-gavel w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Normativa</span>
+                    </a>
+                    <a href="#contacto" class="nav-link flex items-center py-2.5 px-4 rounded-lg text-sm hover:bg-primary-50 dark:hover:bg-gray-700 transition group">
+                        <i class="fas fa-envelope w-6 text-primary-500 group-hover:text-primary-700"></i>
+                        <span>Contacto</span>
+                    </a>
+                </nav>
+
+                <div class="mt-6 pt-4 border-t dark:border-gray-700">
+                    <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3">Información del Módulo</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-500">Código</span><span class="font-semibold">1713</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Duración</span><span class="font-semibold">50 horas</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">RD</span><span class="font-semibold">499/2024</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Extensión</span><span class="font-semibold">30-35 pág.</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Evaluación</span><span class="font-semibold">60% + 40%</span></div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <p class="text-xs text-yellow-700 dark:text-yellow-400 font-semibold"><i class="fas fa-exclamation-triangle mr-1"></i> Integridad Académica</p>
+                    <p class="text-xs text-yellow-600 dark:text-yellow-500 mt-1">El trabajo debe ser propio. No se puede copiar, plagiar ni usar IA.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 md:ml-72 p-4 md:p-8 max-w-5xl">
+
+            <!-- Search -->
+            <div class="mb-8 sticky top-20 z-30">
+                <div class="relative max-w-xl mx-auto">
+                    <input type="text" id="searchInput" placeholder="Buscar en todo el módulo..."
+                           class="w-full px-6 py-3 rounded-full border-2 border-primary-300 dark:border-primary-700 bg-white dark:bg-gray-800 focus:border-primary-500 focus:outline-none shadow-lg text-sm">
+                    <button onclick="searchContent()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-600 text-white px-5 py-2 rounded-full hover:bg-primary-700 transition text-sm">
+                        <i class="fas fa-search mr-1"></i> Buscar
+                    </button>
+                </div>
+                <div id="searchResults" class="hidden mt-3 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 max-w-xl mx-auto max-h-96 overflow-y-auto"></div>
+            </div>
+
+            <!-- ===================== INICIO ===================== -->
+            <section id="inicio" class="mb-16 fade-in">
+                <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl p-8 md:p-12 text-white mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4 mr-5">
+                            <i class="fas fa-project-diagram text-5xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold">Proyecto Intermodular</h2>
+                            <p class="text-primary-200 text-lg">CFGM Actividades Comerciales — 2º Curso</p>
+                            <p class="text-primary-300 text-sm">I.E.S. "La Ería" — Oviedo/Uviéu — Curso 2025-2026</p>
+                        </div>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-8 max-w-2xl">
+                        Módulo profesional de <strong>Proyecto Intermodular</strong> (código 1713, RD 499/2024). 
+                        Duración: <strong>50 horas</strong>. Integración de todos los conocimientos del ciclo formativo 
+                        a través de un proyecto de innovación sobre el lanzamiento de un nuevo producto.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm text-center">
+                            <i class="fas fa-clock text-2xl mb-2"></i>
+                            <p class="font-bold text-xl">50h</p>
+                            <p class="text-xs text-primary-200">Duración</p>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm text-center">
+                            <i class="fas fa-tasks text-2xl mb-2"></i>
+                            <p class="font-bold text-xl">5 RAs</p>
+                            <p class="text-xs text-primary-200">Resultados</p>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm text-center">
+                            <i class="fas fa-weight-hanging text-2xl mb-2"></i>
+                            <p class="font-bold text-xl">60/40</p>
+                            <p class="text-xs text-primary-200">% Evaluación</p>
+                        </div>
+                        <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm text-center">
+                            <i class="fas fa-file-alt text-2xl mb-2"></i>
+                            <p class="font-bold text-xl">30-35</p>
+                            <p class="text-xs text-primary-200">Páginas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alert Integridad -->
+                <div class="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-600 text-2xl mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-red-800 dark:text-red-400 text-lg mb-2">⚠️ Normas de Integridad Académica</h3>
+                            <p class="text-red-700 dark:text-red-300 leading-relaxed">
+                                <strong>EL TRABAJO DEBE SER PROPIO DEL ALUMNO/A.</strong> No se puede copiar, plagiar contenidos de otros trabajos, 
+                                ni tampoco ser realizado con <strong>Inteligencia Artificial</strong>. Eso supondrá el <strong>SUSPENSO del proyecto</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Cards -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <a href="#ras" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-primary-100 dark:bg-primary-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-bullseye text-2xl text-primary-600 group-hover:text-primary-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-primary-600 transition">RAs y Criterios</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Los 5 resultados de aprendizaje y sus criterios de evaluación oficiales.</p>
+                    </a>
+                    <a href="#indice" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-100 dark:bg-green-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-list text-2xl text-green-600 group-hover:text-green-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-green-600 transition">Índice del Proyecto</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Estructura completa del proyecto con todas las secciones requeridas.</p>
+                    </a>
+                    <a href="#evaluacion" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-clipboard-check text-2xl text-purple-600 group-hover:text-purple-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-purple-600 transition">Rúbrica de Evaluación</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Criterios de calificación detallados: 60% contenido + 40% defensa.</p>
+                    </a>
+                    <a href="#formato" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-orange-100 dark:bg-orange-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-file-alt text-2xl text-orange-600 group-hover:text-orange-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-orange-600 transition">Formato y Normas</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Tipografía, márgenes, interlineado, bibliografía y requisitos de presentación.</p>
+                    </a>
+                    <a href="#defensa" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-microphone text-2xl text-blue-600 group-hover:text-blue-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-blue-600 transition">Exposición y Defensa</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">20 minutos máx. ante tribunal. Uso de TIC, vocabulario técnico y defensa.</p>
+                    </a>
+                    <a href="#recursos" class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-teal-100 dark:bg-teal-900 dark:bg-opacity-40 rounded-lg p-3 mr-4">
+                                <i class="fas fa-book text-2xl text-teal-600 group-hover:text-teal-700"></i>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-teal-600 transition">Recursos y Referencias</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Enlaces de interés, modelos de bibliografía y material complementario.</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- ===================== RAs ===================== -->
+            <section id="ras" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-800 p-6 md:p-8 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Resultados de Aprendizaje y Criterios de Evaluación</h2>
+                        <p class="text-primary-200">Módulo Profesional: Proyecto Intermodular — Código 1713 — Duración: 50 horas — RD 499/2024</p>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="space-y-4">
+                            <!-- RA1 -->
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                <button onclick="toggleAccordion('ra1')" class="w-full px-6 py-4 text-left bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 hover:bg-primary-100 dark:hover:bg-primary-800 transition flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="bg-primary-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 font-bold text-lg">1</span>
+                                        <h3 class="text-base md:text-lg font-bold pr-4">Caracteriza las empresas del sector atendiendo a su organización y al tipo de producto o servicio que ofrecen</h3>
+                                    </div>
+                                    <i class="fas fa-chevron-down transform transition-transform text-primary-600" id="icon-ra1"></i>
+                                </button>
+                                <div id="ra1" class="accordion-content">
+                                    <div class="p-6 border-t dark:border-gray-700">
+                                        <h4 class="font-semibold mb-4 text-primary-600 dark:text-primary-400"><i class="fas fa-list-check mr-2"></i>Criterios de Evaluación:</h4>
+                                        <div class="grid gap-3">
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">a</span>
+                                                <p>Se han identificado las empresas tipo más representativas del sector.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">b</span>
+                                                <p>Se ha descrito la estructura organizativa de las empresas.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">c</span>
+                                                <p>Se han caracterizado los principales departamentos.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">d</span>
+                                                <p>Se han determinado las funciones de cada departamento.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">e</span>
+                                                <p>Se ha evaluado el volumen de negocio de acuerdo a las necesidades de los clientes.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">f</span>
+                                                <p>Se ha definido la estrategia para dar respuesta a las demandas.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">g</span>
+                                                <p>Se han valorado los recursos humanos y materiales necesarios.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">h</span>
+                                                <p>Se ha realizado el seguimiento de los resultados de acuerdo a la estrategia aplicada.</p>
+                                            </div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                                <span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">i</span>
+                                                <p>Se han relacionado los productos o servicios con su posible contribución a los <strong>ODS (Objetivos de Desarrollo Sostenible)</strong>.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RA2 -->
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                <button onclick="toggleAccordion('ra2')" class="w-full px-6 py-4 text-left bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 hover:bg-primary-100 dark:hover:bg-primary-800 transition flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="bg-primary-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 font-bold text-lg">2</span>
+                                        <h3 class="text-base md:text-lg font-bold pr-4">Plantea soluciones a las necesidades del sector teniendo en cuenta la viabilidad de las mismas, los costes asociados y elaborando un pequeño proyecto</h3>
+                                    </div>
+                                    <i class="fas fa-chevron-down transform transition-transform text-primary-600" id="icon-ra2"></i>
+                                </button>
+                                <div id="ra2" class="accordion-content">
+                                    <div class="p-6 border-t dark:border-gray-700">
+                                        <h4 class="font-semibold mb-4 text-primary-600 dark:text-primary-400"><i class="fas fa-list-check mr-2"></i>Criterios de Evaluación:</h4>
+                                        <div class="grid gap-3">
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">a</span><p>Se han identificado las necesidades.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">b</span><p>Se han planteado en grupo posibles soluciones.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">c</span><p>Se ha obtenido la información relativa a las soluciones planteadas.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">d</span><p>Se han identificado aspectos innovadores que puedan ser de aplicación.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">e</span><p>Se ha realizado el estudio de viabilidad técnica.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">f</span><p>Se han identificado las partes que componen el proyecto.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">g</span><p>Se han previsto los recursos materiales y humanos para realizarlo.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">h</span><p>Se ha realizado el presupuesto económico correspondiente.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">i</span><p>Se ha definido y elaborado la documentación para su diseño.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">j</span><p>Se han identificado los aspectos relacionados con la calidad del proyecto.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">k</span><p>Se han presentado en público las ideas más relevantes de los proyectos propuestos.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RA3 -->
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                <button onclick="toggleAccordion('ra3')" class="w-full px-6 py-4 text-left bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 hover:bg-primary-100 dark:hover:bg-primary-800 transition flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="bg-primary-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 font-bold text-lg">3</span>
+                                        <h3 class="text-base md:text-lg font-bold pr-4">Planifica la ejecución de las actividades propuestas a la solución planteada, determinando el plan de intervención y elaborando la documentación correspondiente</h3>
+                                    </div>
+                                    <i class="fas fa-chevron-down transform transition-transform text-primary-600" id="icon-ra3"></i>
+                                </button>
+                                <div id="ra3" class="accordion-content">
+                                    <div class="p-6 border-t dark:border-gray-700">
+                                        <h4 class="font-semibold mb-4 text-primary-600 dark:text-primary-400"><i class="fas fa-list-check mr-2"></i>Criterios de Evaluación:</h4>
+                                        <div class="grid gap-3">
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">a</span><p>Se han temporizado las secuencias de las actividades.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">b</span><p>Se han determinado los recursos y la logística de cada actividad.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">c</span><p>Se han identificado permisos y autorizaciones en caso de ser necesarios.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">d</span><p>Se han identificado las actividades que implican riesgos en su ejecución.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">e</span><p>Se ha tenido en cuenta el plan de prevención de riesgos y los medios y equipos necesarios.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">f</span><p>Se han asignado recursos materiales y humanos a cada actividad.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">g</span><p>Se han tenido en cuenta posibles imprevistos.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">h</span><p>Se han propuesto soluciones a los posibles imprevistos.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">i</span><p>Se ha elaborado la documentación necesaria.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RA4 -->
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                <button onclick="toggleAccordion('ra4')" class="w-full px-6 py-4 text-left bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 hover:bg-primary-100 dark:hover:bg-primary-800 transition flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="bg-primary-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 font-bold text-lg">4</span>
+                                        <h3 class="text-base md:text-lg font-bold pr-4">Realiza el seguimiento de la ejecución de las actividades planteadas, verificando que se cumple con la planificación</h3>
+                                    </div>
+                                    <i class="fas fa-chevron-down transform transition-transform text-primary-600" id="icon-ra4"></i>
+                                </button>
+                                <div id="ra4" class="accordion-content">
+                                    <div class="p-6 border-t dark:border-gray-700">
+                                        <h4 class="font-semibold mb-4 text-primary-600 dark:text-primary-400"><i class="fas fa-list-check mr-2"></i>Criterios de Evaluación:</h4>
+                                        <div class="grid gap-3">
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">a</span><p>Se ha definido el procedimiento de seguimiento de las actividades.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">b</span><p>Se ha verificado la calidad de los resultados de las actividades.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">c</span><p>Se han identificado posibles desviaciones de la planificación y/o los resultados esperados.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">d</span><p>Se ha informado de las desviaciones en caso de ser necesario.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">e</span><p>Se han solucionado las desviaciones y se han documentado las intervenciones.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">f</span><p>Se ha definido y elaborado la documentación necesaria para la evaluación de las actividades y del proyecto en su conjunto.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RA5 -->
+                            <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                <button onclick="toggleAccordion('ra5')" class="w-full px-6 py-4 text-left bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 hover:bg-primary-100 dark:hover:bg-primary-800 transition flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="bg-primary-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 font-bold text-lg">5</span>
+                                        <h3 class="text-base md:text-lg font-bold pr-4">Transmite información con claridad, de manera ordenada y estructurada</h3>
+                                    </div>
+                                    <i class="fas fa-chevron-down transform transition-transform text-primary-600" id="icon-ra5"></i>
+                                </button>
+                                <div id="ra5" class="accordion-content">
+                                    <div class="p-6 border-t dark:border-gray-700">
+                                        <h4 class="font-semibold mb-4 text-primary-600 dark:text-primary-400"><i class="fas fa-list-check mr-2"></i>Criterios de Evaluación:</h4>
+                                        <div class="grid gap-3">
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">a</span><p>Se ha mantenido una actitud ordenada y metódica en la transmisión de la información.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">b</span><p>Se ha transmitido información verbal tanto horizontal como verticalmente.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">c</span><p>Se ha transmitido información entre los miembros del grupo utilizando medios informáticos.</p></div>
+                                            <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-lg p-3"><span class="bg-primary-600 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mr-3 text-xs font-bold mt-0.5">d</span><p>Se han conocido los términos técnicos en otras lenguas que sean estándares del sector.</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== ÍNDICE DEL PROYECTO ===================== -->
+            <section id="indice" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-600 to-green-800 p-6 md:p-8 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Índice Integrado del Proyecto</h2>
+                        <p class="text-green-200">Estructura completa — Proyecto Intermodular I y II — Guía de trabajo para el alumnado</p>
+                        <p class="text-green-300 text-sm mt-2">Los textos en <strong>negrita</strong> indican los contenidos que se incorporan en 2º curso.</p>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <!-- INTRODUCCIÓN -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-primary-700 dark:text-primary-400 flex items-center">
+                                <span class="bg-primary-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">INTRODUCCIÓN</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-primary-500 mt-1.5 mr-3"></i><p><strong>Proyecto de innovación en el marco de lanzamiento de un nuevo producto.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-primary-500 mt-1.5 mr-3"></i><p><strong>Sinopsis del producto de lanzamiento.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-primary-500 mt-1.5 mr-3"></i><p><strong>Abstract en inglés (ING).</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-primary-500 mt-1.5 mr-3"></i><p><strong>Descripción de la empresa y sector:</strong></p></div>
+                                <div class="ml-8 space-y-1">
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p>Nombre de la empresa y descripción.</p></div>
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p>Descripción del sector en el que opera la empresa.</p></div>
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p><strong>Tendencias en el sector aplicadas al producto escogido y últimas innovaciones.</strong></p></div>
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p><strong>La organización de la prevención en la empresa: Modalidad preventiva de la empresa. (IPE)</strong></p></div>
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p><strong>Forma jurídica de la empresa y trámites de creación. (GPC – RA2)</strong></p></div>
+                                    <div class="flex items-start"><i class="fas fa-minus text-primary-400 mt-1.5 mr-3 text-xs"></i><p><strong>Obligaciones fiscales y contables básicas de la empresa. (GPC – RA7)</strong></p></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DESARROLLO 1 -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-green-700 dark:text-green-400 flex items-center">
+                                <span class="bg-green-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">DESARROLLO 1</span>
+                                <span>Elección y descripción del producto de innovación</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Descripción del producto, cualidades y características.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Categorizar el tipo de economía (circular o lineal). (DIG)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Packaging y reciclabilidad. (DIG)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Análisis del ciclo de vida. (SA)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Aplicar principios de ecodiseño. (SA)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Análisis comparativo con la competencia (características, marca, envase, etc.). (MAC)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Público objetivo para el producto de innovación.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-green-500 mt-1.5 mr-3"></i><p><strong>Posicionamiento como producto de alta gama. (VT – RA4)</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- DESARROLLO 2 -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-blue-700 dark:text-blue-400 flex items-center">
+                                <span class="bg-blue-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">DESARROLLO 2</span>
+                                <span>Proveedores y aprovisionamiento</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-blue-500 mt-1.5 mr-3"></i><p><strong>Criterios de selección de proveedores. (GC)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-blue-500 mt-1.5 mr-3"></i><p><strong>Comparación de ofertas y condiciones. (GC)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-blue-500 mt-1.5 mr-3"></i><p><strong>Procedimientos de comunicación y pedidos. (GC)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-blue-500 mt-1.5 mr-3"></i><p><strong>Gestión de stocks e inventarios. (TA – RA4)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-blue-500 mt-1.5 mr-3"></i><p><strong>Previsión de demanda y cálculo del Volumen Óptimo de Pedido. (TA – RA4)</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- DESARROLLO 3 -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-400 flex items-center">
+                                <span class="bg-purple-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">DESARROLLO 3</span>
+                                <span>Costes, precios e inversiones</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-purple-500 mt-1.5 mr-3"></i><p><strong>Estrategias de política de precios (costes, CVP, competencia, valor percibido).</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-purple-500 mt-1.5 mr-3"></i><p><strong>Comparación de precios con la competencia. (MAC)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-purple-500 mt-1.5 mr-3"></i><p><strong>Plan de inversiones básicas. (GPC – RA4)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-purple-500 mt-1.5 mr-3"></i><p><strong>Fuentes de financiación y servicios bancarios. (GPC – RA4)</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- DESARROLLO 4 -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">DESARROLLO 4</span>
+                                <span>Estrategia comercial y de marketing</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Elaborar el argumentario de ventas (fortalezas, debilidades, ventajas, soluciones). (PV)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Organización del lanzamiento del producto y objetivos comerciales.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Situaciones para introducir acciones promocionales. (DPV)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Selección de la acción promocional más adecuada. (DPV)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Plan de marketing digital para la empresa. (CE – RA1)</strong></p></div>
+                                <div class="ml-8 space-y-1">
+                                    <div class="flex items-start"><i class="fas fa-circle text-orange-400 mt-2 mr-3 text-xs"></i><p>Palabras clave y posicionamiento.</p></div>
+                                    <div class="flex items-start"><i class="fas fa-circle text-orange-400 mt-2 mr-3 text-xs"></i><p>Campañas de publicidad online (Google Ads, Meta Ads, etc.).</p></div>
+                                </div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Estrategia de comunicación digital con clientes. (CE – RA4)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Comparar lanzamiento tradicional (tienda física) con lanzamiento digital (tienda online, RRSS). (DIG)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-orange-500 mt-1.5 mr-3"></i><p><strong>Diseño de material publicitario (ficha, PLV, banner, vídeo, etc.). (AIC)</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- DESARROLLO 5 -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-red-700 dark:text-red-400 flex items-center">
+                                <span class="bg-red-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">DESARROLLO 5</span>
+                                <span>Atención al cliente y calidad del servicio</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-red-500 mt-1.5 mr-3"></i><p><strong>Indicadores de calidad en la atención comercial. (SAC – RA6)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-red-500 mt-1.5 mr-3"></i><p><strong>Medición de la satisfacción del cliente y eficacia del servicio. (SAC – RA6)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-red-500 mt-1.5 mr-3"></i><p><strong>Procedimientos de tramitación de quejas y reclamaciones. (SAC – RA5)</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- CONCLUSIÓN -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-400 flex items-center">
+                                <span class="bg-gray-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">CONCLUSIÓN</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-gray-500 mt-1.5 mr-3"></i><p><strong>¿Qué conocimientos nuevos he adquirido al realizar este trabajo?</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-gray-500 mt-1.5 mr-3"></i><p><strong>¿Qué conclusión saco sobre el producto descrito?</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-gray-500 mt-1.5 mr-3"></i><p><strong>Valoración personal: atractivo del producto y su relación con mi futura vida laboral.</strong></p></div>
+                            </div>
+                        </div>
+
+                        <!-- ANEXOS -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-teal-400 flex items-center">
+                                <span class="bg-teal-600 text-white rounded-lg px-3 py-1 mr-3 text-sm">ANEXOS</span>
+                            </h3>
+                            <div class="ml-4 space-y-2 text-gray-700 dark:text-gray-300">
+                                <div class="flex items-start"><i class="fas fa-angle-right text-teal-500 mt-1.5 mr-3"></i><p><strong>Gestión en la nube (OneDrive) de toda la información y tareas. (DIG)</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-teal-500 mt-1.5 mr-3"></i><p><strong>Pantallazo de la organización de carpetas y archivos.</strong></p></div>
+                                <div class="flex items-start"><i class="fas fa-angle-right text-teal-500 mt-1.5 mr-3"></i><p><strong>Cronogramas, gráficos de Gantt, inventarios, balances, presupuestos y demás documentos generados.</strong></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== RÚBRICA DE EVALUACIÓN ===================== -->
+            <section id="evaluacion" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-900 p-6 md:p-8 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Rúbrica de Evaluación</h2>
+                        <p class="text-purple-200">I.E.S. "La Ería" — CFGM Actividades Comerciales — Curso 2025-2026</p>
+                        <p class="text-purple-300 text-sm mt-1">Módulo 1713: Proyecto Intermodular · RD 499/2024</p>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <!-- Summary -->
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-30 rounded-xl p-6 text-center border-2 border-purple-200 dark:border-purple-700">
+                                <i class="fas fa-file-alt text-3xl text-purple-600 mb-3"></i>
+                                <h3 class="text-xl font-bold text-purple-800 dark:text-purple-400">BLOQUE A</h3>
+                                <p class="text-purple-600 dark:text-purple-400 font-semibold">Formato y Contenidos</p>
+                                <div class="text-4xl font-bold text-purple-700 dark:text-purple-300 my-2">60%</div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Máximo 6,00 puntos</p>
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900 dark:bg-opacity-30 rounded-xl p-6 text-center border-2 border-green-200 dark:border-green-700">
+                                <i class="fas fa-microphone text-3xl text-green-600 mb-3"></i>
+                                <h3 class="text-xl font-bold text-green-800 dark:text-green-400">BLOQUE B</h3>
+                                <p class="text-green-600 dark:text-green-400 font-semibold">Exposición y Defensa</p>
+                                <div class="text-4xl font-bold text-green-700 dark:text-green-300 my-2">40%</div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Máximo 4,00 puntos</p>
+                            </div>
+                        </div>
+
+                        <!-- Block A Table -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-400 border-b-2 border-purple-200 dark:border-purple-700 pb-3">
+                                <i class="fas fa-file-alt mr-2"></i>BLOQUE A — FORMATO Y CONTENIDOS (Máx. 6,00 puntos — 60%)
+                            </h3>
+                            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+                                <table class="w-full text-left text-sm">
+                                    <thead>
+                                        <tr class="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-50">
+                                            <th class="px-4 py-3 font-semibold">Criterio de Evaluación</th>
+                                            <th class="px-4 py-3 font-semibold text-center w-28">Puntuación Máx.</th>
+                                            <th class="px-4 py-3 font-semibold text-center w-24">SI / NO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Portada, índice y paginación correctos</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Tipografía, interlineado y justificación del texto</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Bibliografía y referencias utilizadas</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,50</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Extensión adecuada del trabajo (excluidos anexos, resumen e índice)</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Resumen e introducción: objetivos y planteamiento del trabajo</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,50</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Desarrollo del contenido: coherencia, profundidad y aplicación de conocimientos de los módulos del ciclo</td>
+                                            <td class="px-4 py-3 font-bold text-center">3,00</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Conclusiones del trabajo</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,75</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Anexos y material complementario</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-purple-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Innovación y originalidad en la propuesta del proyecto</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-50 font-bold">
+                                            <td class="px-4 py-3">TOTAL BLOQUE A</td>
+                                            <td class="px-4 py-3 text-center text-purple-700 dark:text-purple-400">___ / 6,00 puntos</td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Block B Table -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-green-700 dark:text-green-400 border-b-2 border-green-200 dark:border-green-700 pb-3">
+                                <i class="fas fa-microphone mr-2"></i>BLOQUE B — EXPOSICIÓN Y DEFENSA (Máx. 4,00 puntos — 40%)
+                            </h3>
+                            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+                                <table class="w-full text-left text-sm">
+                                    <thead>
+                                        <tr class="bg-green-100 dark:bg-green-900 dark:bg-opacity-50">
+                                            <th class="px-4 py-3 font-semibold">Criterio de Evaluación</th>
+                                            <th class="px-4 py-3 font-semibold text-center w-28">Puntuación Máx.</th>
+                                            <th class="px-4 py-3 font-semibold text-center w-24">SI / NO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <tr class="hover:bg-green-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Uso de medios digitales / T.I.C. en la presentación</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,50</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-green-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Respeto al tiempo de exposición establecido (máx. 20 min)</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,50</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-green-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Claridad, orden y dominio en la exposición</td>
+                                            <td class="px-4 py-3 font-bold text-center">1,00</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-green-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Comunicación fluida y vocabulario técnico adecuado</td>
+                                            <td class="px-4 py-3 font-bold text-center">0,75</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                        <tr class="hover:bg-green-50 dark:hover:bg-gray-700 transition">
+                                            <td class="px-4 py-3">Respuestas sólidas y fundamentadas a las preguntas del tribunal en la defensa</td>
+                                            <td class="px-4 py-3 font-bold text-center">1,25</td>
+                                            <td class="px-4 py-3 text-center"><div class="inline-block w-5 h-5 border-2 border-gray-400 rounded"></div></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="bg-green-100 dark:bg-green-900 dark:bg-opacity-50 font-bold">
+                                            <td class="px-4 py-3">TOTAL BLOQUE B</td>
+                                            <td class="px-4 py-3 text-center text-green-700 dark:text-green-400">___ / 4,00 puntos</td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Final Grade -->
+                        <div class="bg-gradient-to-r from-purple-50 to-green-50 dark:from-purple-900 dark:bg-opacity-20 dark:to-green-900 dark:bg-opacity-20 rounded-xl p-6 border-2 border-purple-200 dark:border-purple-700 text-center">
+                            <h3 class="text-xl font-bold mb-3">NOTA FINAL</h3>
+                            <p class="text-lg text-gray-700 dark:text-gray-300">Bloque A + Bloque B = <strong>___ + ___ = ___ / 10 puntos</strong></p>
+                        </div>
+
+                        <!-- Signature -->
+                        <div class="mt-6 pt-6 border-t dark:border-gray-700">
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <p class="text-gray-600 dark:text-gray-400">En Oviedo, a _____ de _______________ de _______.</p>
+                                <p class="text-gray-600 dark:text-gray-400">Firma del evaluador/a: ___________________________</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== FORMATO Y NORMAS ===================== -->
+            <section id="formato" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-orange-600 to-orange-800 p-6 md:p-8 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Formato y Requisitos de Presentación</h2>
+                        <p class="text-orange-200">Estructura y Formato Proyecto Intermodular II — Todas las normas que debes cumplir</p>
+                    </div>
+                    <div class="p-6 md:p-8">
+
+                        <!-- 1. Extensión -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">1</span>
+                                Extensión
+                            </h3>
+                            <div class="bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20 rounded-xl p-5 border-l-4 border-orange-500">
+                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                    La extensión del trabajo estará comprendida entre <strong>30 y 35 páginas</strong> (incluidos los Anexos, la portada, el resumen y el índice, <strong>máximo 35 páginas</strong>).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 2. Formato -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">2</span>
+                                Formato
+                            </h3>
+                            <div class="space-y-6">
+                                <!-- Tipografía -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-font mr-2"></i>Tamaño y tipo de letra</h4>
+                                    <div class="grid md:grid-cols-2 gap-3">
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-20 text-center">Texto</span><span class="text-gray-700 dark:text-gray-300">Arial 11</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-20 text-center">Notas al pie</span><span class="text-gray-700 dark:text-gray-300">Arial 9</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-20 text-center">Cuadros/Tablas</span><span class="text-gray-700 dark:text-gray-300">Arial 9</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-20 text-center">Fuente figuras</span><span class="text-gray-700 dark:text-gray-300">Arial 9</span></div>
+                                    </div>
+                                </div>
+
+                                <!-- Interlineado -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-text-height mr-2"></i>Espacio interlineado</h4>
+                                    <div class="grid md:grid-cols-2 gap-3">
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-28 text-center">Texto</span><span class="text-gray-700 dark:text-gray-300">1,5</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-28 text-center">Notas al pie</span><span class="text-gray-700 dark:text-gray-300">Interlineado sencillo</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-28 text-center">Cuadros/Tablas</span><span class="text-gray-700 dark:text-gray-300">Interlineado sencillo</span></div>
+                                        <div class="flex items-center"><span class="bg-primary-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-28 text-center">Títulos/Fuentes</span><span class="text-gray-700 dark:text-gray-300">Interlineado sencillo</span></div>
+                                    </div>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2"><strong>Espaciado:</strong> anterior 6 puntos y posterior 0 puntos.</p>
+                                </div>
+
+                                <!-- Márgenes -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-ruler-combined mr-2"></i>Márgenes: <span class="text-gray-700 dark:text-gray-300 font-normal">2,5 cm</span></h4>
+                                </div>
+
+                                <!-- Portada -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-id-card mr-2"></i>Portada</h4>
+                                    <p class="text-gray-700 dark:text-gray-300 mb-2">Debe incluir:</p>
+                                    <div class="grid md:grid-cols-2 gap-2">
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">Nombre y apellidos del alumno/a</span></div>
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">DNI</span></div>
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">Curso académico</span></div>
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">Ciclo formativo</span></div>
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">Familia profesional</span></div>
+                                        <div class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i><span class="text-sm">Nombre y apellidos del tutor/a</span></div>
+                                    </div>
+                                </div>
+
+                                <!-- Otros -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-cog mr-2"></i>Otros requisitos</h4>
+                                    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Texto <strong>justificado</strong> a ambos lados</span></li>
+                                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Índice <strong>paginado</strong> vinculado a la página correspondiente</span></li>
+                                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span><strong>Numeración</strong> de las páginas: parte inferior de la página a la derecha</span></li>
+                                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Iluminación tipográfica en el texto: <em>cursiva</em></span></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Encabezamientos -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-heading mr-2"></i>Encabezamientos y apartados</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center p-2 bg-white dark:bg-gray-600 rounded">
+                                            <span class="bg-blue-600 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-16 text-center">Capítulo</span>
+                                            <span class="text-sm">MAYÚSCULA 14 p + <strong>NEGRITA</strong></span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-white dark:bg-gray-600 rounded">
+                                            <span class="bg-blue-500 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-16 text-center">1er nivel</span>
+                                            <span class="text-sm">MAYÚSCULA 12 p + <strong>NEGRITA</strong></span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-white dark:bg-gray-600 rounded">
+                                            <span class="bg-blue-400 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-16 text-center">2º nivel</span>
+                                            <span class="text-sm">Minúscula 12 p + <strong>Negrita</strong></span>
+                                        </div>
+                                        <div class="flex items-center p-2 bg-white dark:bg-gray-600 rounded">
+                                            <span class="bg-blue-300 text-white rounded px-2 py-1 text-xs font-bold mr-3 w-16 text-center">3er nivel</span>
+                                            <span class="text-sm">Minúscula 12 p + <em>Cursiva</em></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Numeración -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-hashtag mr-2"></i>Numeración de títulos y apartados</h4>
+                                    <div class="flex items-center space-x-4 mb-3">
+                                        <span class="bg-primary-600 text-white rounded px-3 py-1 font-bold">1.</span>
+                                        <span class="bg-primary-500 text-white rounded px-3 py-1 font-bold">1.1</span>
+                                        <span class="bg-primary-400 text-white rounded px-3 py-1 font-bold">1.1.1</span>
+                                    </div>
+                                </div>
+
+                                <!-- Numeración tablas -->
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <h4 class="font-bold text-primary-700 dark:text-primary-400 mb-3"><i class="fas fa-table mr-2"></i>Numeración de tablas, figuras, etc.</h4>
+                                    <p class="text-gray-700 dark:text-gray-300 mb-3">Deberán ir numeradas consecutivamente por capítulos, haciendo referencia el primer dígito al número del capítulo:</p>
+                                    <div class="space-y-2">
+                                        <div class="bg-white dark:bg-gray-600 rounded-lg p-3">
+                                            <p class="text-sm"><strong>Ej: Tabla 2.5:</strong> Nivel de ventas por área geográfica</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">(corresponde a la quinta tabla del capítulo/epígrafe segundo)</p>
+                                        </div>
+                                        <div class="bg-white dark:bg-gray-600 rounded-lg p-3">
+                                            <p class="text-sm"><strong>Ej: Figura 4.2:</strong> Modelo de gestión de ventas utilizado</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">(corresponde a la segunda figura del capítulo/epígrafe cuarto)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Bibliografía -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">3</span>
+                                Bibliografía
+                            </h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">La bibliografía se presentará al final del proyecto de acuerdo con el siguiente formato:</p>
+                            
+                            <div class="space-y-4">
+                                <!-- Legislación -->
+                                <div class="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-xl p-5 border border-red-200 dark:border-red-800">
+                                    <h4 class="font-bold text-red-700 dark:text-red-400 mb-3"><i class="fas fa-gavel mr-2"></i>LEGISLACIÓN:</h4>
+                                    <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                                        <p>Ley 30/1992, de 26 de noviembre, de Régimen Jurídico de las Administraciones Públicas y del Procedimiento Administrativo Común (B.O.E. nº. 285, de 27 de noviembre).</p>
+                                        <p>Real Decreto Legislativo 2/2011, de 5 de septiembre, por el que se aprueba el Texto Refundido de la Ley de Puertos del Estado y de la Marina Mercante (B.O.E. nº. 253, de 20 de octubre).</p>
+                                    </div>
+                                </div>
+
+                                <!-- Referencias -->
+                                <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-xl p-5 border border-blue-200 dark:border-blue-800">
+                                    <h4 class="font-bold text-blue-700 dark:text-blue-400 mb-3"><i class="fas fa-book mr-2"></i>REFERENCIAS BIBLIOGRÁFICAS</h4>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <h5 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Artículo de revista:</h5>
+                                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">VÁZQUEZ RODOLFO (1997): "La estrategia de marketing como instrumento competitivo en las empresas de alta tecnología". <em>Revista Asturiana de Economía</em>, 9, 25-51.</p>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Libro:</h5>
+                                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">ALBI, E.; GONZÁLEZ PÁRAMO, J.M y LÓPEZ CASASNOVAS, G. (1997): <em>Gestión Pública. Fundamentos, técnicas y casos</em>. Barcelona: Ariel.</p>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Capítulo de libro:</h5>
+                                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">BARBER, P. y GONZÁLEZ, B. (1996): "La eficiencia en los hospitales públicos españoles", en Meneu R. y V. Ortún (eds.) <em>Políticas y gestión sanitarias: la agenda explícita</em>. Barcelona: SG y Asociación de Economía.</p>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Fuentes electrónicas:</h5>
+                                            <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Se indicará la fecha de la última consulta.<br>ICEX (2014): "Fiscalidad en los EAU". Disponible en http://www.icex.es/icex/es/navegacionsuperior/panoramaglobal/mundo/REP2014287877.html</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Requisitos de presentación -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">4</span>
+                                Requisitos de Presentación
+                            </h3>
+                            <div class="bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20 rounded-xl p-5 border-l-4 border-orange-500">
+                                <p class="text-gray-700 dark:text-gray-300">Para la entrega definitiva, los proyectos deberán ser entregados en <strong>formato PDF</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- 5. Defensa -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-orange-700 dark:text-orange-400 flex items-center">
+                                <span class="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">5</span>
+                                Defensa del Proyecto
+                            </h3>
+                            <div class="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-xl p-5 border-l-4 border-red-500">
+                                <div class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-red-600 text-2xl mr-4"></i>
+                                    <div>
+                                        <p class="text-red-700 dark:text-red-300 font-bold mb-2">EL TRABAJO DEBE SER PROPIO DEL ALUMNO/A</p>
+                                        <p class="text-red-700 dark:text-red-300">No se puede copiar, plagiar contenidos de otros trabajos, ni tampoco ser realizado con <strong>Inteligencia Artificial</strong>. Eso supondrá el <strong>SUSPENSO del proyecto</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== EXPOSICIÓN Y DEFENSA ===================== -->
+            <section id="defensa" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-900 p-6 md:p-8 text-white">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Exposición y Defensa del Proyecto</h2>
+                        <p class="text-blue-200">Todo lo que necesitas saber sobre la presentación y defensa ante el tribunal</p>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-bold mb-4 text-blue-700 dark:text-blue-400"><i class="fas fa-users mr-2"></i>El Tribunal</h3>
+                                <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-xl p-5">
+                                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        El alumnado expondrá y defenderá su proyecto, ante un tribunal formado por su <strong>tutor/a</strong> y el <strong>resto del profesorado</strong> de los módulos profesionales.
+                                    </p>
+                                </div>
+
+                                <h3 class="text-xl font-bold mb-4 mt-6 text-blue-700 dark:text-blue-400"><i class="fas fa-clock mr-2"></i>Tiempo de Exposición</h3>
+                                <div class="bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-xl p-5 border border-yellow-200 dark:border-yellow-800">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-stopwatch text-4xl text-yellow-600 mr-4"></i>
+                                        <div>
+                                            <p class="text-3xl font-bold text-yellow-700 dark:text-yellow-400">20 minutos</p>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">Máximo tiempo de exposición</p>
+                                            <p class="text-sm text-red-600 dark:text-red-400 font-semibold mt-1">⚠️ El exceso de tiempo será penalizado en la nota</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="text-xl font-bold mb-4 mt-6 text-blue-700 dark:text-blue-400"><i class="fas fa-laptop mr-2"></i>Material de Apoyo</h3>
+                                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        Para dicha exposición el alumno/a podrá disponer del <strong>material de apoyo</strong> que estime conveniente (presentaciones, infografías, vídeos, etc.).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-bold mb-4 text-blue-700 dark:text-blue-400"><i class="fas fa-question-circle mr-2"></i>Turno de Preguntas</h3>
+                                <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-xl p-5">
+                                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        Tras la intervención, el alumno/a <strong>defenderá su proyecto</strong> ante los integrantes del tribunal que realizarán un <strong>turno de preguntas</strong> para aclarar las dudas que hayan podido surgir durante la exposición.
+                                    </p>
+                                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-3">
+                                        Del mismo modo, los integrantes del tribunal pueden hacer <strong>aclaraciones o sugerencias</strong> al alumno sobre su proyecto.
+                                    </p>
+                                </div>
+
+                                <h3 class="text-xl font-bold mb-4 mt-6 text-blue-700 dark:text-blue-400"><i class="fas fa-star mr-2"></i>Aspectos Valorados</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <span class="text-sm">Uso de medios digitales / T.I.C. en la presentación</span>
+                                    </div>
+                                    <div class="flex items-center bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <span class="text-sm">Respeto al tiempo establecido (máx. 20 min)</span>
+                                    </div>
+                                    <div class="flex items-center bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <span class="text-sm">Claridad, orden y dominio en la exposición</span>
+                                    </div>
+                                    <div class="flex items-center bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <span class="text-sm">Comunicación fluida y vocabulario técnico adecuado</span>
+                                    </div>
+                                    <div class="flex items-center bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
+                                        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                        <span class="text-sm">Respuestas sólidas y fundamentadas a las preguntas del tribunal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== CALENDARIO ===================== -->
+            <section id="calendario" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-primary-600 text-white rounded-xl p-4 mr-4">
+                            <i class="fas fa-calendar-alt text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-primary-700 dark:text-primary-400">Calendario y Hitos Importantes</h2>
+                            <p class="text-gray-600 dark:text-gray-400">Planificación orientativa del Proyecto Intermodular</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-primary-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 1-2</span>
+                            </div>
+                            <div class="flex-1 bg-primary-50 dark:bg-primary-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-primary-700 dark:text-primary-400">Elección del Producto y Empresa</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Definición del producto de innovación, descripción de la empresa y análisis del sector. Sinopsis del producto de lanzamiento.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 3-4</span>
+                            </div>
+                            <div class="flex-1 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-blue-700 dark:text-blue-400">Análisis de Mercado y Competencia</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Estudio del público objetivo, análisis DAFO, benchmarking con la competencia. Análisis comparativo con la competencia (características, marca, envase, etc.).</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-green-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 5-6</span>
+                            </div>
+                            <div class="flex-1 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-green-700 dark:text-green-400">Proveedores y Aprovisionamiento</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Selección de proveedores, comparación de ofertas y condiciones, gestión de stocks e inventarios, previsión de demanda y cálculo del VOP.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 7-8</span>
+                            </div>
+                            <div class="flex-1 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-purple-700 dark:text-purple-400">Costes, Precios e Inversiones</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Elaboración del presupuesto, estrategias de política de precios, plan de inversiones básicas, fuentes de financiación y servicios bancarios.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-orange-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 9-10</span>
+                            </div>
+                            <div class="flex-1 bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-orange-700 dark:text-orange-400">Estrategia Comercial y Marketing</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Argumentario de ventas, plan de marketing digital, campañas de publicidad online, diseño de material publicitario, estrategia de comunicación digital.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-red-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 11</span>
+                            </div>
+                            <div class="flex-1 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-red-700 dark:text-red-400">Atención al Cliente y Calidad</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Indicadores de calidad en la atención comercial, medición de la satisfacción del cliente, procedimientos de tramitación de quejas y reclamaciones.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-teal-600 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 12</span>
+                            </div>
+                            <div class="flex-1 bg-teal-50 dark:bg-teal-900 dark:bg-opacity-20 rounded-xl p-5">
+                                <h3 class="font-bold text-lg mb-2 text-teal-700 dark:text-teal-400">Revisión Final y Entrega</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Revisión de formato, bibliografía, extensión y anexos. Entrega definitiva del proyecto en formato PDF.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-red-700 text-white rounded-full w-14 h-14 flex items-center justify-center flex-shrink-0 mr-5 shadow-lg">
+                                <span class="text-sm font-bold">S 13-14</span>
+                            </div>
+                            <div class="flex-1 bg-red-700 bg-opacity-10 dark:bg-red-900 dark:bg-opacity-30 rounded-xl p-5 border-2 border-red-300 dark:border-red-700">
+                                <h3 class="font-bold text-lg mb-2 text-red-700 dark:text-red-400"> Defensas del Proyecto</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">Exposición y defensa del proyecto ante el tribunal (20 minutos máximo por alumno/a). Turno de preguntas y aclaraciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 border-l-4 border-yellow-500 p-6 rounded-lg">
+                        <p class="text-yellow-800 dark:text-yellow-400 text-sm">
+                            <strong><i class="fas fa-info-circle mr-1"></i> Nota:</strong> Las fechas exactas serán comunicadas por el/la tutor/a del módulo. 
+                            Este calendario es orientativo y puede sufrir modificaciones según la dinámica del aula.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== RECURSOS ===================== -->
+            <section id="recursos" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-teal-600 text-white rounded-xl p-4 mr-4">
+                            <i class="fas fa-book-open text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-teal-700 dark:text-teal-400">Recursos y Enlaces de Interés</h2>
+                            <p class="text-gray-600 dark:text-gray-400">Herramientas, referencias y material de apoyo para tu proyecto</p>
+                        </div>
+                    </div>
+
+                    <!-- Herramientas -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-teal-400"><i class="fas fa-tools mr-2"></i>Herramientas Útiles</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-cloud text-3xl text-blue-500 mb-3"></i>
+                                <h4 class="font-bold mb-1">OneDrive</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Gestión en la nube de toda la información y tareas del proyecto.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-palette text-3xl text-purple-500 mb-3"></i>
+                                <h4 class="font-bold mb-1">Canva</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Diseño de material publicitario: fichas, PLV, banners, presentaciones.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-chart-bar text-3xl text-green-500 mb-3"></i>
+                                <h4 class="font-bold mb-1">Excel / Google Sheets</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Presupuestos, inventarios, balances, gráficos de Gantt.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-chart-line text-3xl text-orange-500 mb-3"></i>
+                                <h4 class="font-bold mb-1">Google Trends</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Análisis de tendencias de búsqueda para tu producto.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-search text-3xl text-red-500 mb-3"></i>
+                                <h4 class="font-bold mb-1">Google Keyword Planner</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Investigación de palabras clave para marketing digital.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5 hover:shadow-lg transition">
+                                <i class="fas fa-file-powerpoint text-3xl text-orange-600 mb-3"></i>
+                                <h4 class="font-bold mb-1">PowerPoint / Google Slides</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Presentación para la exposición y defensa del proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fuentes de información -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-teal-400"><i class="fas fa-database mr-2"></i>Fuentes de Información</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-external-link-alt text-primary-600 mr-2"></i>INE - Instituto Nacional de Estadística</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Datos estadísticos del sector comercial, tendencias de mercado y datos demográficos.</p>
+                                <a href="https://www.ine.es" target="_blank" class="text-primary-600 hover:text-primary-700 text-sm font-semibold mt-2 inline-block">ine.es →</a>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-external-link-alt text-primary-600 mr-2"></i>Cámaras de Comercio</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Información empresarial, estudios sectoriales y datos de mercado.</p>
+                                <a href="https://www.camara.es" target="_blank" class="text-primary-600 hover:text-primary-700 text-sm font-semibold mt-2 inline-block">camara.es →</a>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-external-link-alt text-primary-600 mr-2"></i>ICEX España Exportación</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Información de mercados internacionales, estudios de sector y fiscalidad.</p>
+                                <a href="https://www.icex.es" target="_blank" class="text-primary-600 hover:text-primary-700 text-sm font-semibold mt-2 inline-block">icex.es →</a>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                                <h4 class="font-bold mb-2 flex items-center"><i class="fas fa-external-link-alt text-primary-600 mr-2"></i>ODS - Agenda 2030</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Objetivos de Desarrollo Sostenible de las Naciones Unidas. Referencia para relacionar tu proyecto con los ODS.</p>
+                                <a href="https://www.un.org/sustainabledevelopment/es/" target="_blank" class="text-primary-600 hover:text-primary-700 text-sm font-semibold mt-2 inline-block">un.org →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Módulos relacionados -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-teal-400"><i class="fas fa-link mr-2"></i>Módulos Integrados en el Proyecto</h3>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+                            <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>IPE</strong> - Implantación de Prevención
+                            </div>
+                            <div class="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>GPC</strong> - Gestión y Control del Proceso Comercial
+                            </div>
+                            <div class="bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>GC</strong> - Gestión y Control del Almacén
+                            </div>
+                            <div class="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>MAC</strong> - Marketing en el Punto de Venta
+                            </div>
+                            <div class="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>VT</strong> - Venta Técnica
+                            </div>
+                            <div class="bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>TA</strong> - Técnicas de Almacenamiento
+                            </div>
+                            <div class="bg-teal-50 dark:bg-teal-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>PV</strong> - Promoción de Ventas
+                            </div>
+                            <div class="bg-indigo-50 dark:bg-indigo-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>DPV</strong> - Dinamización del Punto de Venta
+                            </div>
+                            <div class="bg-pink-50 dark:bg-pink-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>CE</strong> - Comunicación y E-Commerce
+                            </div>
+                            <div class="bg-cyan-50 dark:bg-cyan-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>SAC</strong> - Servicio de Atención al Cliente
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 text-sm">
+                                <strong>DIG</strong> - Digitalización
+                            </div>
+                            <div class="bg-lime-50 dark:bg-lime-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>SA</strong> - Sostenibilidad Ambiental
+                            </div>
+                            <div class="bg-emerald-50 dark:bg-emerald-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>AIC</strong> - Aplicaciones Informáticas Comerciales
+                            </div>
+                            <div class="bg-amber-50 dark:bg-amber-900 dark:bg-opacity-20 rounded-lg p-3 text-sm">
+                                <strong>ING</strong> - Inglés
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== NORMATIVA ===================== -->
+            <section id="normativa" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-red-600 text-white rounded-xl p-4 mr-4">
+                            <i class="fas fa-gavel text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-red-700 dark:text-red-400">Normativa de Referencia</h2>
+                            <p class="text-gray-600 dark:text-gray-400">Marco legal y normativo del Proyecto Intermodular</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-scroll text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">RD 499/2024</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Currículo básico del Ciclo Formativo de Grado Medio de Actividades Comerciales. Real Decreto que establece la ordenación y enseñanzas mínimas del ciclo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-scroll text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Orden de implantación</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Orden de implantación del ciclo en la Comunidad Autónoma correspondiente.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-scroll text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Normativa de evaluación</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Normativa de evaluación del centro educativo I.E.S. "La Ería".</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-scroll text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">Reglamento de régimen interno</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Reglamento de régimen interno del I.E.S. "La Ería".</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-5">
+                            <div class="flex items-start">
+                                <i class="fas fa-scroll text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <h3 class="font-bold mb-1">LOE - Ley Orgánica de Educación</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Ley Orgánica 2/2006, de 3 de mayo, de Educación, modificada por la LOMLOE.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-xl border-2 border-red-200 dark:border-red-800">
+                        <h3 class="text-lg font-bold text-red-700 dark:text-red-400 mb-3"><i class="fas fa-exclamation-triangle mr-2"></i>Normas Fundamentales</h3>
+                        <ul class="space-y-2 text-red-700 dark:text-red-300">
+                            <li class="flex items-start"><i class="fas fa-ban mt-1 mr-3"></i><span>El trabajo debe ser <strong>100% propio</strong> del alumno/a.</span></li>
+                            <li class="flex items-start"><i class="fas fa-ban mt-1 mr-3"></i><span><strong>Prohibido copiar</strong> o plagiar contenidos de otros trabajos.</span></li>
+                            <li class="flex items-start"><i class="fas fa-ban mt-1 mr-3"></i><span><strong>Prohibido utilizar Inteligencia Artificial</strong> para generar contenido del proyecto.</span></li>
+                            <li class="flex items-start"><i class="fas fa-ban mt-1 mr-3"></i><span>El incumplimiento de estas normas supondrá el <strong>SUSPENSO del proyecto</strong>.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check mt-1 mr-3 text-green-600"></i><span>Se fomenta la <strong>originalidad e innovación</strong> en la propuesta del proyecto.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================== CONTACTO ===================== -->
+            <section id="contacto" class="mb-16 fade-in">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-primary-600 text-white rounded-xl p-4 mr-4">
+                            <i class="fas fa-envelope text-3xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-primary-700 dark:text-primary-400">Contacto y Tutorías</h2>
+                            <p class="text-gray-600 dark:text-gray-400">Información del centro y canales de comunicación</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-primary-700 dark:text-primary-400"><i class="fas fa-school mr-2"></i>Centro Educativo</h3>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-building text-primary-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold">I.E.S. "La Ería"</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">C/ Regenta, 4 – 33006 Oviedo/Uviéu</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-phone text-primary-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold">Teléfono</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">985 27 36 54</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-3"></i>
+                                    <div>
+                                        <p class="font-semibold">Localización</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400">Oviedo, Asturias</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4 mt-6 text-primary-700 dark:text-primary-400"><i class="fas fa-user-tie mr-2"></i>Tutor/a del Módulo</h3>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6">
+                                <p class="text-gray-700 dark:text-gray-300">Consulta la información del tutor/a asignado en la plataforma educativa del centro.</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Módulo 1713: Proyecto Intermodular — CFGM Actividades Comerciales</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-primary-700 dark:text-primary-400"><i class="fas fa-comments mr-2"></i>Canales de Comunicación</h3>
+                            <div class="space-y-4">
+                                <div class="bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 rounded-xl p-5">
+                                    <h4 class="font-semibold mb-2 flex items-center text-primary-700 dark:text-primary-400">
+                                        <i class="fas fa-laptop mr-2"></i> Plataforma Virtual
+                                    </h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Consulta de materiales, entrega de tareas, comunicación con el profesorado y seguimiento del progreso.</p>
+                                </div>
+                                <div class="bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 rounded-xl p-5">
+                                    <h4 class="font-semibold mb-2 flex items-center text-primary-700 dark:text-primary-400">
+                                        <i class="fas fa-user-check mr-2"></i> Tutorías Presenciales
+                                    </h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Atención personalizada según horario establecido. Se recomienda pedir cita previa.</p>
+                                </div>
+                                <div class="bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 rounded-xl p-5">
+                                    <h4 class="font-semibold mb-2 flex items-center text-primary-700 dark:text-primary-400">
+                                        <i class="fas fa-cloud mr-2"></i> OneDrive / Cloud
+                                    </h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Gestión y almacenamiento de toda la documentación del proyecto. Organización de carpetas y archivos.</p>
+                                </div>
+                                <div class="bg-primary-50 dark:bg-primary-900 dark:bg-opacity-30 rounded-xl p-5">
+                                    <h4 class="font-semibold mb-2 flex items-center text-primary-700 dark:text-primary-400">
+                                        <i class="fas fa-envelope mr-2"></i> Email Institucional
+                                    </h4>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Comunicación oficial con el profesorado y la administración del centro.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <h3 class="font-bold text-blue-800 dark:text-blue-400 mb-3"><i class="fas fa-lightbulb mr-2"></i>Recomendaciones</h3>
+                        <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Mantén una comunicación fluida con tu tutor/a durante todo el proceso.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Asiste regularmente a las tutorías para resolver dudas y hacer seguimiento.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Utiliza los canales oficiales de comunicación del centro.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Guarda copia de toda la documentación entregada.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Respeta los plazos de entrega establecidos.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-3"></i><span>Organiza tu trabajo en carpetas en OneDrive desde el primer día.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTop" class="hidden fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-primary-700 transition z-50" title="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-graduation-cap text-2xl mr-3 text-primary-400"></i>
+                        <h3 class="font-bold text-lg">Proyecto Intermodular</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        CFGM Actividades Comerciales<br>
+                        I.E.S. "La Ería" — Oviedo/Uviéu<br>
+                        Módulo 1713 · RD 499/2024<br>
+                        Curso 2025-2026
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#ras" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>RAs y Criterios de Evaluación</a></li>
+                        <li><a href="#indice" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>Índice del Proyecto</a></li>
+                        <li><a href="#evaluacion" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>Rúbrica de Evaluación</a></li>
+                        <li><a href="#formato" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>Formato y Normas</a></li>
+                        <li><a href="#defensa" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>Exposición y Defensa</a></li>
+                        <li><a href="#recursos" class="text-gray-400 hover:text-white transition"><i class="fas fa-angle-right mr-2"></i>Recursos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Información del Módulo</h3>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p><strong class="text-white">Código:</strong> 1713</p>
+                        <p><strong class="text-white">Duración:</strong> 50 horas</p>
+                        <p><strong class="text-white">Normativa:</strong> RD 499/2024</p>
+                        <p><strong class="text-white">Extensión:</strong> 30-35 páginas</p>
+                        <p><strong class="text-white">Evaluación:</strong> 60% contenido + 40% defensa</p>
+                        <p><strong class="text-white">Formato entrega:</strong> PDF</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2025-2026 I.E.S. "La Ería" — Proyecto Intermodular — CFGM Actividades Comerciales</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
+        // Check for saved theme preference or prefer-color-scheme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all accordions
+                document.querySelectorAll('.accordion-content').forEach(acc => {
+                    acc.classList.remove('active');
+                });
+                document.querySelectorAll('[id^="icon-ra"]').forEach(ic => {
+                    ic.style.transform = 'rotate(0deg)';
+                });
+                
+                // Open clicked accordion
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Search Functionality
+        function searchContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (searchTerm.length < 3) {
+                resultsDiv.classList.add('hidden');
+                return;
+            }
+
+            const sections = document.querySelectorAll('section');
+            let results = [];
+
+            sections.forEach(section => {
+                const text = section.innerText.toLowerCase();
+                const title = section.querySelector('h2, h3')?.innerText || '';
+                
+                if (text.includes(searchTerm)) {
+                    // Get a snippet around the search term
+                    const index = text.indexOf(searchTerm);
+                    const start = Math.max(0, index - 100);
+                    const end = Math.min(text.length, index + searchTerm.length + 200);
+                    let snippet = text.substring(start, end).trim();
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < text.length) snippet = snippet + '...';
+                    
+                    results.push({
+                        title: title,
+                        id: section.id,
+                        snippet: snippet
+                    });
+                }
+            });
+
+            if (results.length > 0) {
+                resultsDiv.innerHTML = '<h4 class="font-bold mb-3 text-primary-700 dark:text-primary-400"><i class="fas fa-search mr-2"></i>Resultados para "' + searchTerm + '":</h4>' +
+                    results.slice(0, 10).map(r => `
+                        <div class="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer border-b dark:border-gray-700 last:border-0" onclick="document.getElementById('${r.id}').scrollIntoView({behavior: 'smooth'}); document.getElementById('searchResults').classList.add('hidden'); document.getElementById('searchInput').value='';">
+                            <p class="font-semibold text-primary-600 dark:text-primary-400">${r.title}</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">${r.snippet}</p>
+                        </div>
+                    `).join('');
+                resultsDiv.classList.remove('hidden');
+            } else {
+                resultsDiv.innerHTML = '<p class="text-gray-600 dark:text-gray-400"><i class="fas fa-times-circle mr-2 text-red-500"></i>No se encontraron resultados para "' + searchTerm + '"</p>';
+                resultsDiv.classList.remove('hidden');
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchContent();
+            }
+        });
+
+        // Back to Top Button
+        window.onscroll = function() {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden');
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Active Navigation Highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('bg-primary-50', 'dark:bg-gray-700', 'text-primary-700', 'dark:text-primary-400');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('bg-primary-50', 'dark:bg-gray-700', 'text-primary-700', 'dark:text-primary-400');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
